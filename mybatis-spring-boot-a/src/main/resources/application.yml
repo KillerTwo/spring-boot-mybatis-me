@@ -1,0 +1,51 @@
+mybatis:
+    # type-aliases-package指定实体类所在的包
+    type-aliases-package: org.lwt.mybatisspringboota.entity
+    # mapper-locations指定mapper.xml文件所在的包
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    # mappers指定Mapper接口所在的包
+    mappers: org.lwt.mybatisspringboota.mapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+#druid:
+#    url: jdbc:mysql://127.0.0.1:3306/employees
+#    username: root
+#    password: 123456root
+#    initial-size: 1
+#    min-idle: 1
+#    max-active: 20
+#    test-on-borrow: true
+spring:
+   datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://localhost:3306/employees?useSSL=false&serverTimezone=UTC&nullCatalogMeansCurrent=true
+      username: root
+      password: 123456root
+      driverClassName: com.mysql.jdbc.Driver
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      validationQuery: SELECT 1 FROM DUAL
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      
+      
+      
+      

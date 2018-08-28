@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <!-- 指定加载jar相关jar包的类路径 -->
+  <!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
+  <!-- 用于指定生成一组对象的环境。例如指定要连接的数据库，要生成对象的类型和要处理的数据库中的表
+  defaultModelType属性指定如何生成实体类，MyBatis3用于指定生成的代码的运行时环境，使用默认值即可
+   -->
+  <context id="DB2Tables" defaultModelType="flat" targetRuntime="MyBatis3Simple">
+    <!-- 用于指定数据库连接信息，该元素必选，并且只能有一个 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/employees?useSSL=false&amp;serverTimezone=UTC"
+        userId="root"
+        password="123456root">
+    </jdbcConnection>
+    <!-- 来指定JDBC类型和Java类型如何转换,最多可以配置一个 -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+    <!-- 用来控制生成的实体类 -->
+    <javaModelGenerator targetPackage="org.lwt.springbootmybatisg.entity" targetProject="spring-boot-mybatis-g\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    <!-- 配置生成sql映射文件的位置 -->
+    <sqlMapGenerator targetPackage="test.xml"  targetProject="spring-boot-mybatis-g\src\main\java\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+   <!--  <sqlMapGenerator targetPackage="xml.mapper"  targetProject="spring-boot-mybatis-g\src\main\java\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator> -->
+    <!-- 如果不配置该元素，就不会生成Mapper接口 targetPackage生成实体类存放的包名，targetProject指定目标项目路径  -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="org.lwt.springbootmybatisg.dao"  targetProject="spring-boot-mybatis-g\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    <!--只有配置的才会生成实体类和其他文件 
+      tableName指定表名，可以使用通配符
+      domainObjectName :生成对象的基本名称。如果没有指定，MBG会自动根据表名来生成名称
+    -->
+    <table tableName="departments">
+      <!-- <property name="useActualColumnNames" value="true"/> -->
+      <generatedKey column="dept_no" sqlStatement="Mysql"/>
+      <!-- 用来指定自动生成主键的属性 -->
+      <!-- <generatedKey column="ID" sqlStat
+      ement="DB2" identity="true" />
+      <columnOverride column="DATE_FIELD" property="startDate" />
+      指定忽略的类
+      <ignoreColumn column="FRED" />
+      将某些属性默认计算的值更改为指定的值 
+      <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
+    </table>
+
+  </context>
+</generatorConfiguration>
